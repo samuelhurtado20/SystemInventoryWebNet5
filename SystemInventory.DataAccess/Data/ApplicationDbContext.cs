@@ -3,8 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SystemInventory.Models;
 
-namespace SystemInventoryWebNet5.Data
+namespace SystemInventoryWebNet5.DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -12,5 +13,7 @@ namespace SystemInventoryWebNet5.Data
             : base(options)
         {
         }
+
+        public DbSet<Warehouse> Warehouse { get; set; }
     }
 }

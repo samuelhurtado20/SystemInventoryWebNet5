@@ -11,7 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SystemInventoryWebNet5.Data;
+using SystemInventory.DataAccess.Repository;
+using SystemInventory.DataAccess.Repository.IRepository;
+using SystemInventoryWebNet5.DataAccess.Data;
 
 namespace SystemInventoryWebNet5
 {
@@ -29,8 +31,10 @@ namespace SystemInventoryWebNet5
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("Inventory")));
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -63,7 +67,7 @@ namespace SystemInventoryWebNet5
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area=Inventory}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

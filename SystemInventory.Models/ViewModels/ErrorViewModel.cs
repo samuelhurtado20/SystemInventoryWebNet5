@@ -1,6 +1,6 @@
 using System;
 
-namespace SystemInventoryWebNet5.Models
+namespace SystemInventory.Models.ViewModels
 {
     public class ErrorViewModel
     {
