@@ -12,11 +12,13 @@ namespace SystemInventory.DataAccess.Repository
     {
         private readonly ApplicationDbContext _db;
         public IWarehouseRepository Warehouse { get; private set; }
+        public ICategoryRepository Category { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Warehouse = new WarehouseRepository(_db);
+            Category = new CategoryRepository(_db);
         }
 
         public void Save() => _db.SaveChanges();
