@@ -22,8 +22,4 @@
     <ProjectReference Include="..\SystemInventory.Utils\SystemInventory.Utils.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
-  </ItemGroup>
-
 </Project>

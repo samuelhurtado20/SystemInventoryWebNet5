@@ -24,7 +24,7 @@ namespace SystemInventory.DataAccess.Repository
                 entity.Description = warehouse.Description;
                 entity.Status = warehouse.Status;
 
-                _context.SaveChanges();
+                //_context.SaveChanges();
                 return entity;
             }
 

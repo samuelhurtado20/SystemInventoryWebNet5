@@ -1,4 +1,22 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿/*label, .dataTables_info, .previous, .next {
+    color: antiquewhite;
+}*/
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.form-control {
+    border: 1px solid #333;
+    margin-bottom: 2px;
+    padding: 0.25rem;
+}
+    .form-control:focus {
+        box-shadow: 0 0 0 0.15rem #dcdcdc;
+    }
+.btn {
+    padding: 0.25rem 0.75rem;
+}
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
@@ -12,7 +30,7 @@ a {
     color: #0366d6;
 }
 
-/* remove bhrugen
+remove bhrugen
     .btn-primary {
   color: #fff;
   background-color: #2c3e50;
@@ -27,7 +45,7 @@ background-color: #2c3e50;
 border-color: #1861ac;
 }
 
-*/
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
