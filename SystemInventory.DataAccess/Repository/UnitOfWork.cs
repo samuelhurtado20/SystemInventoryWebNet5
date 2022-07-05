@@ -14,12 +14,18 @@ namespace SystemInventory.DataAccess.Repository
         public IWarehouseRepository Warehouse { get; private set; }
         public ICategoryRepository Category { get; private set; }
 
+        public IBrandRepository Brand { get; private set; }
+
+        public IProductRepository Product { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Warehouse = new WarehouseRepository(_db);
             Category = new CategoryRepository(_db);
-        }
+            Brand = new BrandRepository(_db);
+            Product = new ProductRepository(_db);   
+         }
 
         public void Save() => _db.SaveChanges();
 

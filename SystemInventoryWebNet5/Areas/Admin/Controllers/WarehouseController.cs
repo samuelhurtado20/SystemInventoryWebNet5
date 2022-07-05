@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using SystemInventory.DataAccess.Repository.IRepository;
 using SystemInventory.Models;
 
 namespace SystemInventoryWebNet5.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[EnableCors("MyPolicy")]
     public class WarehouseController : Controller
     {
         private readonly IUnitOfWork _uow;
@@ -20,6 +22,7 @@ namespace SystemInventoryWebNet5.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        //[ValidateAntiForgeryToken]
         public IActionResult Upsert(int? id)
         {
             Warehouse warehouse = new Warehouse();
@@ -51,6 +54,7 @@ namespace SystemInventoryWebNet5.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        //[Route("GetAll")]
         public IActionResult GetAll()
         {
             var all = _uow.Warehouse.Get();
