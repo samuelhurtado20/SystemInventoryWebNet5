@@ -22,4 +22,8 @@
     <ProjectReference Include="..\SystemInventory.Utils\SystemInventory.Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\pictures\products\" />
+  </ItemGroup>
+
 </Project>

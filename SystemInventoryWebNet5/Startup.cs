@@ -19,6 +19,7 @@ namespace SystemInventoryWebNet5
 {
     public class Startup
     {
+        readonly string CorsPolicy = "_corsPolicy ";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,6 +30,7 @@ namespace SystemInventoryWebNet5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("Inventory")));
@@ -51,14 +53,17 @@ namespace SystemInventoryWebNet5
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Inventory/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            //app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -70,6 +75,21 @@ namespace SystemInventoryWebNet5
                     pattern: "{area=Inventory}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        private static bool IsOriginAllowed(string origin)
+        {
+            var uri = new Uri(origin);
+            //var env = System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "n/a";
+
+            //var isAllowed = uri.Host.Equals("example.com", StringComparison.OrdinalIgnoreCase)
+            //                || uri.Host.Equals("another-example.com", StringComparison.OrdinalIgnoreCase)
+            //                || uri.Host.EndsWith(".example.com", StringComparison.OrdinalIgnoreCase)
+            //                || uri.Host.EndsWith(".another-example.com", StringComparison.OrdinalIgnoreCase);
+            //if (!isAllowed && env.Contains("DEV", StringComparison.OrdinalIgnoreCase))
+            bool isAllowed = uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase);
+
+            return isAllowed;
         }
     }
 }

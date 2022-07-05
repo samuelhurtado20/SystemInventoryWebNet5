@@ -22,13 +22,13 @@ namespace SystemInventoryWebNet5.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Upsert(int? id)
         {
-            Category warehouse = new();
-            if (id == null) return View(warehouse);
+            Category category = new();
+            if (id == null) return View(category);
 
-            warehouse = _uow.Category.Get(id.GetValueOrDefault());
-            if (warehouse == null) return NotFound();
+            category = _uow.Category.Get(id.GetValueOrDefault());
+            if (category == null) return NotFound();
 
-            return View(warehouse);
+            return View(category);
         }
 
         [HttpPost]

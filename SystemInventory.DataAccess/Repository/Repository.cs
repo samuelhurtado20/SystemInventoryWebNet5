@@ -45,7 +45,7 @@ namespace SystemInventory.DataAccess.Repository
             return _dbSet.Find(id);
         }
 
-        public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string properties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string properties = null)
         {
             IQueryable<T> query = _dbSet;
             if(filter is not null)

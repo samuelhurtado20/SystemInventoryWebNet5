@@ -16,7 +16,7 @@ namespace SystemInventory.DataAccess.Repository.IRepository
         void Insert(T entity);
 
         /// <summary>
-        /// Get all
+        /// Get all without filter
         /// </summary>
         /// <returns></returns>
         IEnumerable<T> Get();
@@ -29,10 +29,10 @@ namespace SystemInventory.DataAccess.Repository.IRepository
         T Get(int id);
 
         /// <summary>
-        /// Get all
+        /// Get all with filter
         /// </summary>
         /// <returns></returns>
-        IEnumerable<T> Get(Expression<Func<T, bool>> filter = null,
+        IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string properties = null
             );
