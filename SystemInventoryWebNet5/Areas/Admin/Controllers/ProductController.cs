@@ -42,6 +42,11 @@ namespace SystemInventoryWebNet5.Areas.Admin.Controllers
                 {
                     Text = c.Name.ToString(),
                     Value = c.Id.ToString(),
+                }),
+                ProductList = _uow.Product.Get().Where(p => p.Id != id).Select(c => new SelectListItem
+                {
+                    Text = c.Name.ToString(),
+                    Value = c.Id.ToString(),
                 })
             };
 
@@ -69,22 +74,27 @@ namespace SystemInventoryWebNet5.Areas.Admin.Controllers
                     Text = c.Name.ToString(),
                     Value = c.Id.ToString(),
                 });
+                productVM.ProductList = _uow.Product.Get().Where(p => p.Id != productVM.Product.Id).Select(c => new SelectListItem
+                {
+                    Text = c.Name.ToString(),
+                    Value = c.Id.ToString(),
+                });
 
-                return View(productVM); 
+                return View(productVM);
             }
 
             // load picture
             string webrootpath = _hostEnviroment.WebRootPath;
             var files = HttpContext.Request.Form.Files;
 
-            if(files.Count > 0)
+            if (files.Count > 0)
             {
                 string fileName = Guid.NewGuid().ToString();
                 var uploads = Path.Combine(webrootpath, @"pictures/products");
                 var ext = Path.GetExtension(files[0].FileName);
-                if(productVM.Product.ImageUrl != null)
+                if (productVM.Product.ImageUrl != null)
                 {
-                    var currentImg = Path.Combine(webrootpath, productVM.Product.ImageUrl);
+                    var currentImg = Path.Combine(webrootpath, productVM.Product.ImageUrl.TrimStart('\\'));
                     if (System.IO.File.Exists(currentImg))
                     {
                         System.IO.File.Delete(currentImg);
@@ -124,6 +134,12 @@ namespace SystemInventoryWebNet5.Areas.Admin.Controllers
         {
             Product entity = _uow.Product.Get(id);
             if (entity == null) return Json(new { success = false, msg = "Error on delete" });
+
+            var currentImg = Path.Combine(_hostEnviroment.WebRootPath, entity.ImageUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(currentImg))
+            {
+                System.IO.File.Delete(currentImg);
+            }
 
             _uow.Product.Delete(entity);
             _uow.Save();

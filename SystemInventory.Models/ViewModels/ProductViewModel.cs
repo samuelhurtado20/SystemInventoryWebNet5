@@ -13,5 +13,8 @@ namespace SystemInventory.Models.ViewModels
 
         [Display(Name = "Brand")]
         public IEnumerable<SelectListItem> BrandList { get; set; }
+
+        [Display(Name = "Product (parent)")]
+        public IEnumerable<SelectListItem> ProductList { get; set; }
     }
 }

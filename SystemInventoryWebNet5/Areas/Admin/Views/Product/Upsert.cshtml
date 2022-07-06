@@ -14,6 +14,7 @@
         // Update
         title = "Update Product";
         <input type="hidden" asp-for="Product.Id">
+        <input type="hidden" asp-for="Product.ImageUrl">
     }
 
     <div class="col-12 border-bottom">
@@ -83,6 +84,16 @@
             <div class="col-8">
                 @Html.DropDownListFor(c=>c.Product.BrandId, Model.BrandList, "Select", new { @class="form-control" })
                 <span asp-validation-for="Product.BrandId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="ProductList"></label>
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(c=>c.Product.ParentId, Model.ProductList, "Select", new { @class="form-control" })
+                <span asp-validation-for="Product.ParentId" class="text-danger"></span>
             </div>
         </div>
 
