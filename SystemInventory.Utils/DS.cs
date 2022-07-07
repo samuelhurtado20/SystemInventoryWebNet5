@@ -8,5 +8,9 @@ namespace SystemInventory.Utils
 {
     public static class DS
     {
+        public const string RoleClient = "RoleClient";
+        public const string RoleAdmin = "RoleAdmin";
+        public const string RoleInventory = "RoleInventory";
+        public const string RoleSales = "RoleSales";
     }
 }

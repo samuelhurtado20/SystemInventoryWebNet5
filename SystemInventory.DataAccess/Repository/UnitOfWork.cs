@@ -13,10 +13,9 @@ namespace SystemInventory.DataAccess.Repository
         private readonly ApplicationDbContext _db;
         public IWarehouseRepository Warehouse { get; private set; }
         public ICategoryRepository Category { get; private set; }
-
         public IBrandRepository Brand { get; private set; }
-
         public IProductRepository Product { get; private set; }
+        public IUserAppRepository UserApp { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -24,7 +23,8 @@ namespace SystemInventory.DataAccess.Repository
             Warehouse = new WarehouseRepository(_db);
             Category = new CategoryRepository(_db);
             Brand = new BrandRepository(_db);
-            Product = new ProductRepository(_db);   
+            Product = new ProductRepository(_db);
+            UserApp = new UserAppRepository(_db);
          }
 
         public void Save() => _db.SaveChanges();
