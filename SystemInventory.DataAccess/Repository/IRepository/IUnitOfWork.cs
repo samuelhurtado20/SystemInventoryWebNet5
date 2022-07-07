@@ -8,6 +8,7 @@ namespace SystemInventory.DataAccess.Repository.IRepository
         ICategoryRepository Category { get; }
         IBrandRepository Brand { get; }
         IProductRepository Product { get; }
+        IUserAppRepository UserApp { get; }
         void Save();
     }
 }

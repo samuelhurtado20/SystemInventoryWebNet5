@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SistemaInventario.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +21,6 @@ namespace SystemInventoryWebNet5
 {
     public class Startup
     {
-        readonly string CorsPolicy = "_corsPolicy ";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,16 +31,20 @@ namespace SystemInventoryWebNet5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("Inventory")));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IEmailSender, EmailSender>();
+
             services.AddControllersWithViews();
         }
 
@@ -64,6 +69,7 @@ namespace SystemInventoryWebNet5
             app.UseRouting();
 
             //app.UseCors();
+            //app.UseIdentity();
 
             app.UseAuthentication();
             app.UseAuthorization();
