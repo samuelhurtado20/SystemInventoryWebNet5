@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SystemInventory.DataAccess.Repository.IRepository;
 using SystemInventory.Models;
+using SystemInventory.Utils;
 
 namespace SystemInventoryWebNet5.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = DS.RoleAdmin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _uow;

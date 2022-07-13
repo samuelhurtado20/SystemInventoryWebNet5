@@ -1,16 +1,20 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using SystemInventory.DataAccess.Repository.IRepository;
 using SystemInventory.Models;
 using SystemInventory.Models.ViewModels;
+using SystemInventory.Utils;
 
 namespace SystemInventoryWebNet5.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = DS.RoleAdmin + "," + DS.RoleClient)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _uow;

@@ -43,7 +43,7 @@ namespace SystemInventoryWebNet5.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            //[EmailAddress]
             public string UserName { get; set; }
             //public string Email { get; set; }
 

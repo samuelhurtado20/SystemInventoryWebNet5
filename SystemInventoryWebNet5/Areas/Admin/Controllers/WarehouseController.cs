@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using SystemInventory.DataAccess.Repository.IRepository;
 using SystemInventory.Models;
+using SystemInventory.Utils;
 
 namespace SystemInventoryWebNet5.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[EnableCors("MyPolicy")]
+    [Authorize(Roles = DS.RoleAdmin)]
     public class WarehouseController : Controller
     {
         private readonly IUnitOfWork _uow;
