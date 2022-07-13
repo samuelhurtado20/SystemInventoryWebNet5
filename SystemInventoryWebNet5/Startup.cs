@@ -42,6 +42,7 @@ namespace SystemInventoryWebNet5
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
             //services.AddScoped<IEmailSender, EmailSender>();
 
             services.AddRazorPages();

@@ -24,7 +24,7 @@ namespace SistemaInventario.Areas.Identity.Pages.Account
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        //private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
         //private readonly IUnitOfWork _uow;
 
@@ -32,7 +32,7 @@ namespace SistemaInventario.Areas.Identity.Pages.Account
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
+            //IEmailSender emailSender,
             RoleManager<IdentityRole> roleManager
             //IUnitOfWork uow
             )
