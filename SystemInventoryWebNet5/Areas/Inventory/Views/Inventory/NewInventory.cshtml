@@ -1,0 +1,142 @@
+﻿@model SystemInventory.Models.ViewModels.InventoryViewModel
+@{
+    ViewData["Title"] = "New Inventory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card-header bg-dark text-light ml-0 row container">
+    <div class="col-6">
+        <i class="fas fa-boxes"></i> @ViewData["Title"]
+    </div>
+</div>
+
+<form method="post" class="p-2">
+    <input asp-for="@Model.Inventory.Id" hidden name="inventoryId"/>
+
+    <div class="form-group row">
+        <div class="col-2" style="text-align:right;">
+            <label class="col-form-label" style="text-align:right;">Warehouse</label>
+        </div>
+        <div class="col-4">
+            @Html.DropDownListFor(b=> b.Inventory.WarehouseId, Model.WarehouseList,
+                new { @class="form-control" })
+            <span asp-validation-for="Inventory.WarehouseId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-2" style="text-align:right;">
+            <label class="col-form-label" style="text-align:right">Product:</label>
+        </div>
+        <div class="col-4">
+            <select name="product" asp-items="Model.ProductList" class="form-control"></select>
+        </div>
+        <div class="col-1">
+            <label class="col-form-label">Amount:</label>
+        </div>
+        <div class="col-1">
+            <input name="amount" id="amountId" class="form-control" maxlength="3" type="number" min="1" value="1"/>
+        </div>
+        <div class="col-3">
+            <button type="submit" class="btn btn-primary" asp-action="AddProductPost" id="btnProduct">
+                <i class="fas fa-plus"></i> Add
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<div>
+    <table class="table table-striped border">
+        <thead class="thead-dark">
+            <tr class="table-secondary thead-dark">
+                <th>
+                    Product
+                </th>
+                <th>
+                    Brand
+                </th>
+                <th style="text-align:right;">
+                    Cost
+                </th>
+                <th style="text-align:right;">
+                    Stock
+                </th>
+                <th style="text-align:right;">
+                    Amount
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var item in Model.InventoryDetails)
+            {
+            <tr>
+                <td style="font-size:14px;">
+                    @Html.DisplayFor(m => item.Product.Description)
+                </td>
+                <td style="font-size:14px;">
+                    @Html.DisplayFor(m => item.Product.Brand.Name)
+                </td>
+                <td style="font-size:14px;text-align:right;">
+                    @Html.DisplayFor(m => item.Product.Cost)
+                </td>
+                <td style="font-size:14px;text-align:right;">
+                    @Html.DisplayFor(m => item.PreviousStock)
+                </td>
+                <td style="font-size:14px;text-align:right;color:blue;font-weight:bold;">
+                    @Html.DisplayFor(m => item.Amount)
+                </td>
+                <td>
+                    <a class="btn btn-primary text-white" asp-action="Mas" asp-route-Id="@item.Id">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                    <a class="btn btn-dark text-white" asp-action="Menos" asp-route-Id="@item.Id">
+                        <i class="fas fa-minus"></i>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@*@if (Model.InventoryDetails.Count>0)
+{
+    <div class="align-content-lg-center">
+        <div class="col-2">
+            <a asp-action="SetStock" class="btn btn-warning form-control" asp-route-Id="@Model.Inventory.Id">
+                <i class="fas fa-save"></i> Set Stock
+            </a>
+        </div>
+    </div>
+}*@
+
+
+@section Scripts{ 
+     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+        $("#btnProduct").click(function () {
+            var amount = document.getElementById("amountId").value;
+            if (amount.toString() == '' || amount < 1) {
+                swal("Error", "Select a valid amount", "error");
+                return false;
+            }
+        });
+
+        Print();
+        function Print() {
+            for (var i = 0; i <= 100; i++ ) 
+            {
+                var m3 = i % 3 === 0;
+                var m5 = i % 5 === 0;
+                var text = (m3 && m5) ? "FizzBuzz" : (m3) ? "Fizz" : (m5) ? "Buzz" : i;
+
+                console.log(text);
+            }
+        }
+    </script>
+ 
+}
+

@@ -27,9 +27,9 @@ namespace SystemInventory.Models
 
         [Required]
         [Display(Name = "Warehouse")]
-        public int WarehouseaId { get; set; }
+        public int WarehouseId { get; set; }
 
-        [ForeignKey("WarehouseaId")]
+        [ForeignKey("WarehouseId")]
         public Warehouse Warehouse { get; set; }
 
         public bool Status { get; set; }

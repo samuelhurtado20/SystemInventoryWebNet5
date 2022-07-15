@@ -10,14 +10,14 @@ namespace SystemInventory.Models
 
         [Required]
         [Display(Name = "Warehouse")]
-        public int BodegaId { get; set; }
+        public int WarehouseId { get; set; }
 
         [ForeignKey("WarehouseId")]
         public Warehouse Warehouse { get; set; }
 
         [Required]
         [Display(Name = "Product")]
-        public int ProductoId { get; set; }
+        public int ProductId { get; set; }
 
         [ForeignKey("ProductId")]
         public Product Product { get; set; }

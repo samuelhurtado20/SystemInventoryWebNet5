@@ -5,7 +5,7 @@ $(document).ready(function () {
 });
 
 function loadDataTable() {
-    datatable = $('#tblDatos').DataTable({
+    datatable = $('#tblData').DataTable({
         "ajax": {
             "url": "/Inventory/Inventory/GetAll"
         },
