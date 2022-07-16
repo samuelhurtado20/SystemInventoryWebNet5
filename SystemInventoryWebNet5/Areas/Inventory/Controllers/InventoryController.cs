@@ -85,46 +85,41 @@ namespace SystemInventoryWebNet5.Areas.Inventory.Controllers
                 _context.SaveChanges();
             }
 
-            return RedirectToAction("NewInventory", new { inventoryId = inventoryVM.Inventory.Id });
+            return RedirectToAction("NewInventory", "Inventory", new { inventoryId = inventoryVM.Inventory.Id });
         }
 
 
-        public IActionResult Mas(int Id)
+        public IActionResult Add(int id)
         {
             inventoryVM = new();
-            var detail = _context.InventoryDetail.FirstOrDefault(d => d.Id == Id);
+            var detail = _context.InventoryDetail.FirstOrDefault(d => d.Id == id);
             inventoryVM.Inventory = _context.Inventory.FirstOrDefault(i => i.Id == detail.InventoryId);
 
-            detail.Amount += 1;
+            detail.Amount++;
             _context.SaveChanges();
-            return RedirectToAction("NewInventory", new { inventarioId = inventoryVM.Inventory.Id });
+            return RedirectToAction("NewInventory", "Inventory", new { inventoryId = inventoryVM.Inventory.Id });
         }
 
-        public IActionResult Menos(int Id)
+        public IActionResult Decrease(int id)
         {
             inventoryVM = new();
-            var detalle = _context.InventoryDetail.FirstOrDefault(d => d.Id == Id);
+            var detalle = _context.InventoryDetail.FirstOrDefault(d => d.Id == id);
             inventoryVM.Inventory = _context.Inventory.FirstOrDefault(i => i.Id == detalle.InventoryId);
-            if (detalle.Amount == 1)
-            {
-                _context.InventoryDetail.Remove(detalle);
-                _context.SaveChanges();
-            }
-            else
-            {
-                detalle.Amount -= 1;
-                _context.SaveChanges();
-            }
-            return RedirectToAction("NewInventory", new { inventoryId = inventoryVM.Inventory.Id });
+
+            if (detalle.Amount == 1) _context.InventoryDetail.Remove(detalle); 
+            else detalle.Amount -= 1;
+
+            _context.SaveChanges();
+            return RedirectToAction("NewInventory", "Inventory", new { inventoryId = inventoryVM.Inventory.Id });
         }
 
 
-        public IActionResult GenerarStock(int Id)
+        public IActionResult SetStock(int Id)
         {
             var inventory = _context.Inventory.FirstOrDefault(i => i.Id == Id);
-            var detalleLista = _context.InventoryDetail.Where(d => d.InventoryId == Id);
+            var details = _context.InventoryDetail.Where(d => d.InventoryId == Id).ToList();
 
-            foreach (var item in detalleLista)
+            foreach (var item in details)
             {
                 var warehouseProduct = _context.WarehouseProduct.Include(p => p.Product).FirstOrDefault(b => b.ProductId == item.ProductId &&
                                                                                                    b.WarehouseId == inventory.WarehouseId);
@@ -143,7 +138,7 @@ namespace SystemInventoryWebNet5.Areas.Inventory.Controllers
                 }
             }
 
-            // Actualizar la Cabecera de Inventario
+            // update inventory header 
             inventory.Status = true;
             inventory.EndDate = DateTime.Now;
             _context.SaveChanges();

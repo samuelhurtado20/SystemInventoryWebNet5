@@ -72,37 +72,37 @@
         <tbody>
            @foreach (var item in Model.InventoryDetails)
             {
-            <tr>
-                <td style="font-size:14px;">
-                    @Html.DisplayFor(m => item.Product.Description)
-                </td>
-                <td style="font-size:14px;">
-                    @Html.DisplayFor(m => item.Product.Brand.Name)
-                </td>
-                <td style="font-size:14px;text-align:right;">
-                    @Html.DisplayFor(m => item.Product.Cost)
-                </td>
-                <td style="font-size:14px;text-align:right;">
-                    @Html.DisplayFor(m => item.PreviousStock)
-                </td>
-                <td style="font-size:14px;text-align:right;color:blue;font-weight:bold;">
-                    @Html.DisplayFor(m => item.Amount)
-                </td>
-                <td>
-                    <a class="btn btn-primary text-white" asp-action="Mas" asp-route-Id="@item.Id">
-                        <i class="fas fa-plus"></i>
-                    </a>
-                    <a class="btn btn-dark text-white" asp-action="Menos" asp-route-Id="@item.Id">
-                        <i class="fas fa-minus"></i>
-                    </a>
-                </td>
-            </tr>
+                <tr>
+                    <td style="font-size:14px;">
+                        @Html.DisplayFor(m => item.Product.Description)
+                    </td>
+                    <td style="font-size:14px;">
+                        @Html.DisplayFor(m => item.Product.Brand.Name)
+                    </td>
+                    <td style="font-size:14px;text-align:right;">
+                        @Html.DisplayFor(m => item.Product.Cost)
+                    </td>
+                    <td style="font-size:14px;text-align:right;">
+                        @Html.DisplayFor(m => item.PreviousStock)
+                    </td>
+                    <td style="font-size:14px;text-align:right;color:blue;font-weight:bold;">
+                        @Html.DisplayFor(m => item.Amount)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary text-white" asp-action="Add" asp-route-Id="@item.Id">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                        <a class="btn btn-dark text-white" asp-action="Decrease" asp-route-Id="@item.Id">
+                            <i class="fas fa-minus"></i>
+                        </a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 </div>
 
-@*@if (Model.InventoryDetails.Count>0)
+@if (Model.InventoryDetails.Count>0)
 {
     <div class="align-content-lg-center">
         <div class="col-2">
@@ -111,7 +111,7 @@
             </a>
         </div>
     </div>
-}*@
+}
 
 
 @section Scripts{ 
