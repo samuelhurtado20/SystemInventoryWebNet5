@@ -24,5 +24,9 @@ namespace SystemInventoryWebNet5.DataAccess.Data
         public DbSet<Brand> Brand { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<UserApp> UserApp { get; set; }
+
+        public DbSet<InventoryDetail> InventoryDetail { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<WarehouseProduct> WarehouseProduct { get; set; }
     }
 }

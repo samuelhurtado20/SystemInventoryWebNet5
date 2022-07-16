@@ -37,13 +37,22 @@ namespace SystemInventoryWebNet5
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddScoped<IEmailSender, EmailSender>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
+            //services.AddScoped<IEmailSender, EmailSender>();
+
+            services.AddRazorPages();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
 
             services.AddControllersWithViews();
         }
@@ -59,7 +68,6 @@ namespace SystemInventoryWebNet5
             else
             {
                 app.UseExceptionHandler("/Inventory/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -67,9 +75,6 @@ namespace SystemInventoryWebNet5
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            //app.UseCors();
-            //app.UseIdentity();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -86,13 +91,6 @@ namespace SystemInventoryWebNet5
         private static bool IsOriginAllowed(string origin)
         {
             var uri = new Uri(origin);
-            //var env = System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "n/a";
-
-            //var isAllowed = uri.Host.Equals("example.com", StringComparison.OrdinalIgnoreCase)
-            //                || uri.Host.Equals("another-example.com", StringComparison.OrdinalIgnoreCase)
-            //                || uri.Host.EndsWith(".example.com", StringComparison.OrdinalIgnoreCase)
-            //                || uri.Host.EndsWith(".another-example.com", StringComparison.OrdinalIgnoreCase);
-            //if (!isAllowed && env.Contains("DEV", StringComparison.OrdinalIgnoreCase))
             bool isAllowed = uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase);
 
             return isAllowed;
