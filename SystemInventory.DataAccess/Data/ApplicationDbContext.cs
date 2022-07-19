@@ -28,5 +28,10 @@ namespace SystemInventoryWebNet5.DataAccess.Data
         public DbSet<InventoryDetail> InventoryDetail { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
         public DbSet<WarehouseProduct> WarehouseProduct { get; set; }
+        public DbSet<Company> Company { get; set; }
+
+        public DbSet<ShoppingCar> ShoppingCar { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
     }
 }
