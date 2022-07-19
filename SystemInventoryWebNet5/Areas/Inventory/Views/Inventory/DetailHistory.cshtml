@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SystemInventory.Models.InventoryDetail>
+@{
+    ViewData["Title"] = "Inventory history detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-primary">Inventory history detail</h2>
+    </div>
+</div>
+
+<div>
+    <table class="table table-striped border">
+        <thead class="thead-dark">
+            <tr class="table-secondary thead-dark">
+                <th>
+                    Product
+                </th>
+                <th>
+                    Brand
+                </th>
+                <th style="text-align:right;">
+                    Cost
+                </th>
+                <th style="text-align:right;">
+                    Previous Stock
+                </th>
+                <th style="text-align:right;">
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td style="font-size:14px;">
+                    @Html.DisplayFor(i => item.Product.Description)
+                </td>
+                <td style="font-size:14px;">
+                    @Html.DisplayFor(i => item.Product.Brand.Name)
+                </td>
+                <td style="font-size:14px; text-align:right;">
+                    @Html.DisplayFor(i => item.Product.Cost)
+                </td>
+                <td style="font-size:14px; text-align:right;">
+                    @Html.DisplayFor(i => item.PreviousStock)
+                </td>
+                <td style="font-size:14px; text-align:right; color:blue;font-weight:bold;">
+                    @Html.DisplayFor(i => item.Amount)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="col-6 p-2">
+    <a class="btn btn-success" asp-action="History"> <i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SystemInventory.DataAccess.Repository.IRepository;
+﻿using SystemInventory.DataAccess.Repository.IRepository;
 using SystemInventoryWebNet5.DataAccess.Data;
 
 namespace SystemInventory.DataAccess.Repository
@@ -16,6 +11,7 @@ namespace SystemInventory.DataAccess.Repository
         public IBrandRepository Brand { get; private set; }
         public IProductRepository Product { get; private set; }
         public IUserAppRepository UserApp { get; private set; }
+        public ICompanyRepository Company { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -25,7 +21,8 @@ namespace SystemInventory.DataAccess.Repository
             Brand = new BrandRepository(_db);
             Product = new ProductRepository(_db);
             UserApp = new UserAppRepository(_db);
-         }
+            Company = new CompanyRepository(_db);
+        }
 
         public void Save() => _db.SaveChanges();
 

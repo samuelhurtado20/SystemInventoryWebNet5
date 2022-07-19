@@ -171,11 +171,29 @@ namespace SystemInventoryWebNet5.Areas.Inventory.Controllers
             return View(inventoryVM);
         }
 
+        public IActionResult History()
+        {
+            return View();
+        }
+
+        public IActionResult DetailHistory(int id)
+        {
+            var history = _context.InventoryDetail.Include(p => p.Product).Include(m => m.Product.Brand).Where(d => d.InventoryId == id);
+            return View(history);
+        }
+
         #region API
         [HttpGet]
         public IActionResult GetAll()
         {
             var all = _context.WarehouseProduct.Include(x => x.Product).Include(x => x.Warehouse).ToList();
+            return Json(new { data = all });
+        }
+
+        [HttpGet]
+        public IActionResult GetHistory()
+        {
+            var all = _context.Inventory.Include(b => b.Warehouse).Include(u => u.UserApp).Where(i => i.Status == true).ToList();
             return Json(new { data = all });
         }
         #endregion
