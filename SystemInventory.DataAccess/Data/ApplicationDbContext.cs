@@ -33,5 +33,6 @@ namespace SystemInventoryWebNet5.DataAccess.Data
         public DbSet<ShoppingCar> ShoppingCar { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
+        public DbSet<Question> Question { get; set; }
     }
 }
