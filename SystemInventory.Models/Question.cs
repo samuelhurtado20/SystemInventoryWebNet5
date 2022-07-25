@@ -10,18 +10,17 @@ namespace SystemInventory.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(100)]
         [Display(Name = "Question")]
         public string Title { get; set; }
 
         [Required]
-        [MaxLength]
+        [Column(TypeName = "ntext")]
         [Display(Name = "Response")]
         public string Response { get; set; }
 
         [Required]
         [Display(Name = "Category")]
-        public string Category { get; set; }
+        public Enums.QuestionCategories Category { get; set; }
 
         public Uri Link { get; set; }
 

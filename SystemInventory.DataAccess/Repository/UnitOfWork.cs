@@ -15,6 +15,7 @@ namespace SystemInventory.DataAccess.Repository
         public IOrderRepository Order { get; private set; }
         public IOrderDetailRepository OrderDetail { get; private set; }
         public IShoppingCarRepository ShoppingCar { get; private set; }
+        public IQuestionRepository Question { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -29,6 +30,7 @@ namespace SystemInventory.DataAccess.Repository
             Order = new OrderRepository(_db);
             OrderDetail = new OrderDetailRepository(_db);
             ShoppingCar = new ShoppingCarRepository(_db);
+            Question = new QuestionRepository(_db);
         }
 
         public void Save() => _db.SaveChanges();
