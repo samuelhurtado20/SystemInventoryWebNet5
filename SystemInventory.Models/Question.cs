@@ -20,6 +20,7 @@ namespace SystemInventory.Models
 
         [Required]
         [Display(Name = "Category")]
+        [EnumDataType(typeof(Enums.QuestionCategories))]
         public Enums.QuestionCategories Category { get; set; }
 
         public Uri Link { get; set; }

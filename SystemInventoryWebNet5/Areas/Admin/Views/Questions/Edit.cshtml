@@ -10,24 +10,31 @@
 <h4>Question</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
+                <Textarea rows="4" asp-for="Title" class="form-control"></Textarea>
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Response" class="control-label"></label>
-                <input asp-for="Response" class="form-control" />
+                <Textarea rows="7" asp-for="Response" class="form-control"></Textarea>
                 <span asp-validation-for="Response" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
                 <select asp-for="Category" class="form-control"></select>
                 <span asp-validation-for="Category" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Category" class="col-md-2 control-label"></label>
+                <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<SystemInventory.Models.Enums.QuestionCategories>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="Category" class="text-danger" />
             </div>
             <div class="form-group">
                 <label asp-for="Link" class="control-label"></label>
