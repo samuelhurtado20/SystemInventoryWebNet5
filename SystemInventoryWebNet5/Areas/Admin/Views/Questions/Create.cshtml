@@ -5,9 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Question</h4>
+<h1>Create Question</h1>
 <hr />
 <div class="row">
     <div class="col-md-6">
@@ -23,6 +21,13 @@
                 <Textarea rows="7" asp-for="Response" class="form-control"></Textarea>
                 <span asp-validation-for="Response" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a class="btn btn-danger" asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="Category" class="col-md-2 control-label"></label>
                 <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<SystemInventory.Models.Enums.QuestionCategories>()">
@@ -50,14 +55,6 @@
                     <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
                 </label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

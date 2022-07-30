@@ -1,10 +1,7 @@
-﻿ using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using SystemInventory.Models;
 using SystemInventoryWebNet5.DataAccess.Data;
 
@@ -23,6 +20,16 @@ namespace SystemInventoryWebNet5.Areas.Admin.Controllers
         // GET: Admin/Questions
         public async Task<IActionResult> Index()
         {
+            return View(await _context.Question.ToListAsync());
+        }
+
+        // GET: Admin/Questions
+        public async Task<IActionResult> List()
+        {
+            //var data = "x";
+            //var one = "x".Equals(data?.ToLower());
+            //var two = data?.ToLower().Equals("x");
+
             return View(await _context.Question.ToListAsync());
         }
 

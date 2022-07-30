@@ -1,0 +1,21 @@
+﻿@model IEnumerable<SystemInventory.Models.Question>
+
+@{
+    ViewData["Title"] = "Question List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="border rounded">
+    @{
+        int i = 1;
+    }
+    @foreach (var item in Model)
+    {
+        <h5>@i - @item.Title.Trim()</h5>
+        <p>@item.Response.Trim()</p>
+        i++;
+    }
+</div>
+
+@section Scripts{
+    <script src="~/js/Questions.js"></script>
+}

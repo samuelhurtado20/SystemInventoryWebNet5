@@ -5,49 +5,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
-
 <div>
     <h4>Question</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Response)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Response)
-        </dd>
-        <dt class = "col-sm-2">
+    <div class="row">
+        <div class = "col-sm-2">
+            <h5>@Html.DisplayNameFor(model => model.Title)</h5>
+        </div>
+        <div class = "col-sm-10">
+            <h5>@Html.DisplayFor(model => model.Title)</h5>
+        </div>
+        <div class = "col-sm-2">
+            <code>@Html.DisplayNameFor(model => model.Response)</code>
+        </div>
+        <div class = "col-sm-10">
+            <p>@Html.DisplayFor(model => model.Response)</p>
+        </div>
+        <div class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-        <dt class = "col-sm-2">
+        </div>
+        <div class = "col-sm-10">
+            <h5>@Html.DisplayFor(model => model.Category)</h5>
+        </div>
+        <div class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Link)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Link)
-        </dd>
-        <dt class = "col-sm-2">
+        </div>
+        <div class = "col-sm-10">
+            <a href="@Html.DisplayFor(model => model.Link)">LINK</a>
+        </div>
+        <div class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
+        </div>
+        <div class = "col-sm-10">
             @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt class = "col-sm-2">
+        </div>
+        <div class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
+        </div>
+        <div class = "col-sm-10">
             @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
+        </div>
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
