@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using SystemInventory.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Http;
+using SystemInventory.Utils;
 
 namespace SystemInventoryWebNet5.Areas.Identity.Pages.Account
 {
@@ -20,14 +23,17 @@ namespace SystemInventoryWebNet5.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IUnitOfWork _uow;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
-            ILogger<LoginModel> logger,
+            ILogger<LoginModel> logger, 
+            IUnitOfWork uow,
             UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _uow = uow;
         }
 
         [BindProperty]
@@ -86,6 +92,10 @@ namespace SystemInventoryWebNet5.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var user = _uow.UserApp.Get(u => u.UserName == Input.UserName);
+                    var productNumber = _uow.ShoppingCar.GetAll(c => c.UserAppId == user.Id).Count();
+                    HttpContext.Session.SetInt32(DS.ssShoppingCar, productNumber);
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

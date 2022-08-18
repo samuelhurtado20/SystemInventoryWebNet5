@@ -42,8 +42,14 @@ namespace SystemInventoryWebNet5
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            
+
             //services.AddScoped<IEmailSender, EmailSender>();
+
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.AddRazorPages();
 
@@ -75,6 +81,7 @@ namespace SystemInventoryWebNet5
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();

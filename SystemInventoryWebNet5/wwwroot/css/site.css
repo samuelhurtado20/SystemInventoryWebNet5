@@ -1,6 +1,12 @@
 ﻿/*label, .dataTables_info, .previous, .next {
     color: antiquewhite;
 }*/
+
+.navbar-nav .nav-link {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 .navbar {
     padding-top: 0;
     padding-bottom: 0;

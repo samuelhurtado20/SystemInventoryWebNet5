@@ -11,5 +11,7 @@ namespace SystemInventory.Models.ViewModels
         public Company Company { get; set; }
         public WarehouseProduct WarehouseProduct { get; set; }
         public ShoppingCar ShoppingCar { get; set; }
+        public IEnumerable<ShoppingCar> ShoppingCarList { get; set; }
+        public Order Order { get; set; }
     }
 }

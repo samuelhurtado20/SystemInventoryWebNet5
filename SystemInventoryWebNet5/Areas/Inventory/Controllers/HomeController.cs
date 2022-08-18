@@ -35,6 +35,17 @@ namespace SystemInventoryWebNet5.Areas.Inventory.Controllers
         public IActionResult Index()
         {
             IEnumerable<Product> products = _uow.Product.GetAll(properties: "Category,Brand");
+
+            var claimIdentidad = (ClaimsIdentity)User.Identity;
+            var claim = claimIdentidad.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (claim != null)
+            {
+                // add to session
+                var productNumber = _uow.ShoppingCar.GetAll(c => c.UserAppId == claim.Value).ToList().Count();
+                HttpContext.Session.SetInt32(DS.ssShoppingCar, productNumber);
+            }
+
             return View(products);
         }
 
@@ -74,7 +85,7 @@ namespace SystemInventoryWebNet5.Areas.Inventory.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Detalle(ShoppingCarViewModel shoppingCarVM)
+        public IActionResult Details(ShoppingCarViewModel shoppingCarVM)
         {
             var claimIdentidad = (ClaimsIdentity)User.Identity;
             var claim = claimIdentidad.FindFirst(ClaimTypes.NameIdentifier);
