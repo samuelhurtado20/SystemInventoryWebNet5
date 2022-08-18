@@ -12,5 +12,6 @@ namespace SystemInventory.Utils
         public const string RoleAdmin = "RoleAdmin";
         public const string RoleInventory = "RoleInventory";
         public const string RoleSales = "RoleSales";
+        public const string ssShoppingCar = "ss-Shopping-Car";
     }
 }

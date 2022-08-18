@@ -2,15 +2,16 @@
 
 <form method="post">
     <input hidden asp-for="ShoppingCar.ProductId"/>
+    <input hidden asp-for="@Model.WarehouseProduct.Amount" id="stock"/>
     <div class="container backgroundWhite">
         <div class="card">
-            <div class="card-header bg-light text-light ml-0 row container">
-                <div class="col-12 col-md-6">
+            <div class="card-header bg-light m-0 text-light row container">
+                <div class="col-12 col-md-6 text-md-left">
                     <h1 class="text-primary">@Model.ShoppingCar.Product.Description</h1>
                 </div>
-                <div class="col-12 col-md-6 text-md-right pt-4">
-                    <span class="badge badge-success pt-2" style="height:30px;">@Model.ShoppingCar.Product.Brand.Name</span>
-                    <span class="badge badge-warning pt-2" style="height:30px;">@Model.ShoppingCar.Product.Category.Name</span>
+                <div class="col-12 col-md-6 text-md-right">
+                    <span class="btn btn-success" style="height:30px;">@Model.ShoppingCar.Product.Brand.Name</span>
+                    <span class="btn btn-warning" style="height:30px;">@Model.ShoppingCar.Product.Category.Name</span>
                 </div>
             </div>
             <div class="card-body">
@@ -19,15 +20,15 @@
                         <div class="col-8 col-lg-8">
 
                             <div class="row pl-2">
-                                <h5 class="text-muted">Serie : @Model.ShoppingCar.Product.SerialNumber</h5>
+                                <h5 class="text-muted">Serial : @Model.ShoppingCar.Product.SerialNumber</h5>
                             </div>
 
                             <div class="row text-center pl-2" style="color:black; font-weight:bold">
                                 <div class="p-1 col-3 bg-secondary">
-                                    <div>Precio</div>
+                                    <div>Price</div>
                                 </div>
                                 <div class="p-1 col-3 bg-secondary">
-                                    <div>En Stock</div>
+                                    <div>On Stock</div>
                                 </div>
                             </div>
                             <div class="row text-center pl-2" style="color:white; font-weight:bold">
@@ -41,7 +42,7 @@
 
                             <div class="row p-4 pl-2">
                                 <div class="col-3 text-primary"><h5 class="form-text text-center">Amount:</h5></div>
-                                <div class="col-2"><input class="form-control" asp-for="ShoppingCar.Amount" style="text-align:right;" min="1" /></div>
+                                <div class="col-2"><input class="form-control" asp-for="ShoppingCar.Amount" style="text-align:right;" min="1" id="amount" /></div>
                             </div>
                         </div>
                         <div class="col-12 col-lg-3 offset-lg-1 text-center">
@@ -53,11 +54,11 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-12 col-md-6 pb-1">
-                        <a asp-action="Index" Class="btn btn-success form-control  btn-square btn-lg" style="height:50px;">Back</a>
+                        <a asp-action="Index" Class="btn btn-success form-control  btn-square btn-lg">Back</a>
                     </div>
                     <div class="col-12 col-md-6 pb-1">
 
-                        <button type="submit" value="Add to Cart" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">Add to car</button>
+                        <button type="submit" value="Add to Cart" class="btn btn-primary btn-square btn-lg form-control" id="addCar">Add to Cart</button>
 
                     </div>
                 </div>
@@ -66,3 +67,18 @@
     </div>
 </form>
 
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+$("#addCar").click(function() {
+    var stock = document.getElementById("stock").value;
+    var amount = document.getElementById("amount").value;
+    if (amount.toString() == '' || amount < 1 || amount > stock) {
+        swal("Error", "Invalid Amount", "error");
+        return false;
+    }
+})
+    </script>
+}
